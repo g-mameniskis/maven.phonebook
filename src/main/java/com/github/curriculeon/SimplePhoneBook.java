@@ -10,8 +10,7 @@ import java.util.Map;
  */
 public class SimplePhoneBook {
 
-    private Map <String, String> phoneMap = new HashMap<String, String>();
-     private Object List;
+    private Map <String, String> phoneMap = new HashMap<>();
 
     public void add(String name, String phoneNumberToAdd) {
         phoneMap.put(name, phoneNumberToAdd);
@@ -35,12 +34,18 @@ public class SimplePhoneBook {
 
     public List<String> getAllContactNames() {
         // https://www.mkyong.com/java8/java-8-convert-map-to-list/
-        return List<String> keysInList = new ArrayList<>(phoneMap.keySet());
+        List<String> keysInList = new ArrayList<>(phoneMap.keySet());
         keysInList.forEach(System.out::println);
+        return keysInList;
     }
 
     public String reverseLookup(String phoneNumber) {
+        // https://stackoverflow.com/questions/1383797/java-hashmap-how-to-get-key-from-value
+        for(Map.Entry<String, String> entry : phoneMap.entrySet()) {
+            if (Objects.equals(phoneNumber, entry.getValue())) {
+                return phoneNumber.getKey();
+            }
+        }
 
-        return null;
     }
 }
